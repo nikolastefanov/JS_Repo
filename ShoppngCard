@@ -1,0 +1,112 @@
+function solve() {
+   let textArea = document.querySelector('body > div > textarea');
+    let totalPrice = 0;
+    let listOfUniqueThings = [];
+    let addBtn = document.getElementsByClassName('add-product');
+    let arrayAddBtn = Array.from(addBtn);
+    for (let i = 0; i < arrayAddBtn.length; i++) {
+        arrayAddBtn[i].addEventListener('click', function one() {
+            let name = document.querySelector(`body > div > div:nth-child(${i + 2}) > div.product-details > div`).textContent;
+            let price = document.querySelector(`body > div > div:nth-child(${i + 2}) > div.product-line-price`).textContent;
+            if (!listOfUniqueThings.includes(name)) {
+                listOfUniqueThings.push(name);
+            }
+            let result = `Added ${name} for ${price} to the cart.\n`;
+            totalPrice += Number(price);
+            textArea.value += result;
+        });
+    }
+    let checkOut = document.querySelector('body > div > button');
+    checkOut.addEventListener('click', function final() {
+        let finalSting = `You bought ${listOfUniqueThings.join(', ')} for ${totalPrice.toFixed(2)}.`;
+        textArea.value += finalSting;
+        disableButtons();
+    });
+
+    function disableButtons() {
+       let buttons = Array.from(document.querySelectorAll('button'));
+       buttons.forEach(button => button.disabled = true);
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="template.css">
+    <title>SHOPPING CART</title>
+</head>
+
+<body onload="solve()">
+    <h1>Shopping Cart</h1>
+    <div class="shopping-cart">
+
+        <div class="column-labels">
+            <label class="product-image">Image</label>
+            <label class="product-details">Product</label>
+            <label class="product-add">Add</label>
+            <label class="product-price">Price</label>
+        </div>
+
+        <div class="product">
+            <div class="product-image">
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6yxJDgVjW3k5pxNUX6Nz94n6Pj2kCOUZ_GWBdorEs9LhOYd97">
+            </div>
+            <div class="product-details">
+                <div class="product-title">Bread</div>
+                <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+            <div class="product-add">
+                <button class="add-product">
+                    Add
+                </button>
+            </div>
+            <div class="product-line-price">0.80</div>
+        </div>
+
+        <div class="product">
+            <div class="product-image">
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRf2Fv5x9chdUzzR0VUxoKAOXO91SE8u5F6CmZmoAHfHkPBjM4r0A">
+            </div>
+            <div class="product-details">
+                <div class="product-title">Milk</div>
+                <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. </p>
+            </div>
+            <div class="product-add">
+                <button class="add-product">
+                    Add
+                </button>
+            </div>
+            <div class="product-line-price">1.09</div>
+        </div>
+
+        <div class="product">
+            <div class="product-image">
+                <img src="https://www.freepngimg.com/thumb/tomato/3-tomato-png-image-picture-download-thumb.png">
+            </div>
+            <div class="product-details">
+                <div class="product-title">Tomatoes</div>
+                <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+            <div class="product-add">
+                <button class="add-product">
+                    Add
+                </button>
+            </div>
+            <div class="product-line-price">0.99</div>
+        </div>
+
+        <textarea rows="5" cols="50" disabled></textarea>
+
+        <button class="checkout">Checkout</button>
+
+    </div>
+    <script src="solution.js">solve()</script>
+</body>
+
+</html>
