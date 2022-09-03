@@ -1,0 +1,113 @@
+function solve() {
+
+   let buttons=document.querySelectorAll('exercise,button');
+
+   let size=document.querySelectorAll('tbody tr').length;
+
+   let validSudomu=true;
+
+   button[0].addEventListener('click',(e)=>{
+       let cells=Array.from(document.querySelectorAll('tbody input'))
+       .map(e=e.value);
+
+       let parcedCells=[];
+
+       for(let i=0;i<size;i++){
+           parcedCells.push([...cells.slice(i*size,(i+1)*size)]);
+       }
+
+       for(let i=0;i<size;i++){
+           validSudomu=validSudomu?(new Set(parsedCells[i])).size===size:false;
+       }
+
+       for(let col=0;col<parsedCells.length;col++){
+           let temp=[];
+
+           for(let row=0;row<parsedCells.length;row++){
+               temp.push(parcedCells[row][COL]);
+           }
+           validSudomu=validSudomu?(new Set(temp)).size===size:false;
+       }
+
+       console.log(validSudomu);
+       validSudomu=true;
+   })
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<link rel="stylesheet" href="template.css">
+	<title>SUDOMU</title>
+</head>
+
+<body>
+	<div id="container">
+		<main id="main">
+			<div id="exercise">
+				<table>
+					<thead>
+						<tr>
+							<th colspan="9">SUDOMU</th>
+						</tr>
+					</thead>
+					<tfoot>
+						<tr>
+							<td colspan="3">
+								<button>Quick Check</button>
+								<button>Clear</button>
+							</td>
+						</tr>
+					</tfoot>
+					<tbody>
+						<tr>
+							<td>
+								<input min="1" max="3" type="number" />
+							</td>
+							<td>
+								<input min="1" max="3" type="number" />
+							</td>
+							<td>
+								<input min="1" max="3" type="number" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input min="1" max="3" type="number" />
+							</td>
+							<td>
+								<input min="1" max="3" type="number" />
+							</td>
+							<td>
+								<input min="1" max="3" type="number" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input min="1" max="3" type="number" />
+							</td>
+							<td>
+								<input min="1" max="3" type="number" />
+							</td>
+							<td>
+								<input min="1" max="3" type="number" />
+							</td>
+						</tr>
+
+					</tbody>
+				</table>
+				<div id="check">
+					<p></p>
+				</div>
+			</div>
+		</main>
+	</div>
+
+	<script src="./solution.js"></script>
+	<script>
+	solve();
+	</script>
+</body>
+
+</html>
