@@ -1,0 +1,59 @@
+function attachGradientEvents() {
+    document.getElementById('gradient')
+           .addEventListener('mousemove',onMove);
+
+  function onMove(event){
+
+      const offset=event.pageX-event.target.offsetLeft;
+
+      const percent=Math.round(offset/event.target.clientWidth*100);
+
+      document.getElementById('result').textContent=`${percent}%`;
+  }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mouse Gradient</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body onload="attachGradientEvents()">
+    <div id="gradient-box">
+        <div id="gradient">Hover here!</div>
+    </div>
+    <div id="result"></div>
+</body>
+<script src="./app.js"></script>
+</html>
+
+
+@import url('https://fonts.googleapis.com/css?family=Baloo+Bhai');
+
+body {
+    font-family: 'Baloo Bhai', cursive;
+}
+
+#gradient-box {
+    width: 300px;
+    border: 2px solid lightgrey;
+}
+
+#gradient-box:hover {
+    border: 2px solid black;
+}
+
+#gradient {
+    height: 30px;
+    color: white;
+    text-shadow: 1px 1px 10px black;
+    text-align: center;
+    line-height: 30px;
+    background: linear-gradient(to right, black, white);
+    cursor: crosshair;
+}
