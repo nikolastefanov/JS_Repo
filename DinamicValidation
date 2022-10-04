@@ -1,0 +1,59 @@
+function validate() {
+ //select input field and add change event listener
+ document.getElementById('email')
+            .addEventListener('change',onChange);
+  
+            function onChange(ev){
+                //console.log('changed');
+                //OnChange->validate input
+                const email=ev.target.value;
+                if((/^[a-z]+@[a-z]+\.[a-z]+$/).test(email)){
+                    //if valid remove class error
+                    ev.target.className=' ';
+                }else{
+                    //else->add class error
+                    ev.target.className='error';
+                }
+            }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dynamic Validation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body onload="validate()">
+    <label for="email">Enter email:</label>
+    <input id="email" type="text" />
+
+    <script src="./app.js"></script>
+</body>
+</html>
+
+
+@import url('https://fonts.googleapis.com/css?family=Baloo+Bhai');
+
+body {
+    font-family: 'Baloo Bhai', cursive;
+    text-align: center;
+    width: 50%;
+    margin: 2rem auto;
+}
+
+.error {
+    border: 1px solid red;
+}
+
+input {
+    outline: none;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 1px solid gray;
+    padding: 5px;
+}
