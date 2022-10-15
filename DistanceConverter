@@ -1,0 +1,147 @@
+function attachEventsListeners() {
+    document.getElementById('convert').addEventListener('click', onBtnClick);
+  
+  function onBtnClick() {
+    let inputDistance = Number(document.getElementById('inputDistance').value);
+    let outputDistance = document.getElementById('outputDistance');
+    let inputUnits = document.getElementById('inputUnits').value;
+    let outputUnits = document.getElementById('outputUnits').value;
+
+    let inputToM = 0;
+    let result = 0;
+    switch (inputUnits){
+      case 'km':
+        inputToM = inputDistance * 1000;
+        break;
+      case 'm':
+        inputToM = inputDistance;
+        break;
+      case 'cm':
+        inputToM = inputDistance * 0.01;
+        break;
+      case 'mm':
+        inputToM = inputDistance * 0.001;
+        break;
+      case 'mi':
+        inputToM = inputDistance * 1609.34;
+        break;
+      case 'yrd':
+        inputToM = inputDistance * 0.9144;
+        break;
+      case 'ft':
+        inputToM = inputDistance * 0.3048;
+        break;
+      case 'in':
+        inputToM = inputDistance * 0.0254;
+        break;
+    }
+    switch (outputUnits){
+        case 'km':
+          result = inputToM / 1000;
+          break;
+        case 'm':
+          result = inputToM;
+          break;
+        case 'cm':
+          result = inputToM / 0.01;
+          break;
+        case 'mm':
+          result = inputToM / 0.001;
+          break;
+        case 'mi':
+          result = inputToM / 1609.34;
+          break;
+        case 'yrd':
+          result = inputToM / 0.9144;
+          break;
+        case 'ft':
+          result = inputToM / 0.3048;
+          break;
+        case 'in':
+          result = inputToM / 0.0254;
+          break;
+      }
+      outputDistance.value = result;
+    }
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Distance Converter</title>
+    <script src="distanceConverter.js"></script>
+    <link rel="stylesheet" href="distanceConverter.css">
+</head>
+
+<body onload="attachEventsListeners()">
+    <h1>Distance Converter</h1>
+    <div>
+        <label for="inputDistance">From:</label>
+        <input type="text" id="inputDistance">
+        <select id="inputUnits">
+            <option value="km">Kilometers</option>
+            <option value="m">Meters</option>
+            <option value="cm">Centimeters</option>
+            <option value="mm">Millimeters</option>
+            <option value="mi">Miles</option>
+            <option value="yrd">Yards</option>
+            <option value="ft">Feet</option>
+            <option value="in">Inches</option>
+        </select>
+        <input type="button" id="convert" value="Convert">
+    </div>
+    <div>
+        <label for="outputDistance">To:</label>
+        <input type="text" id="outputDistance" disabled="disabled">
+        <select id="outputUnits">
+            <option value="km">Kilometers</option>
+            <option value="m">Meters</option>
+            <option value="cm">Centimeters</option>
+            <option value="mm">Millimeters</option>
+            <option value="mi">Miles</option>
+            <option value="yrd">Yards</option>
+            <option value="ft">Feet</option>
+            <option value="in">Inches</option>
+        </select>
+    </div>
+</body>
+
+</html>
+
+
+label, input {
+    display: inline-block;
+    width: 5em;
+}
+
+input, select {
+    padding: 3px;
+    border-radius: 4px;
+    border: none;
+}
+
+label {
+    text-align: right;
+}
+
+#convert {
+    background: #453f3f;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    text-transform: uppercase;
+    width: 86px;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    left: 16px;
+}
+
+#convert:hover {
+    background: white;
+    color: #453f3f;
+}
+
