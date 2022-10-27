@@ -1,0 +1,97 @@
+unction addItem() {
+    const $elements={
+        inputText:document.getElementById('newItemText'),
+        inputValue:document.getElementById('newItemValue'),
+        selectMenu:document.getElementById('menu')
+    };
+    
+    const $option=document.createElement('option');
+    
+    $option.textContent=$elements.inputText.value;
+    $option.value=$elements.inputValue.value;
+
+    $elements.selectMenu.appendChild($option);
+
+    $elements.inputText.value='';
+    $elements.inputValue.value=''
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Fill Dropdown</title>
+    <script src="dropdown.js"></script>
+    <link rel="stylesheet" href="filldropdown.css">
+</head>
+
+<body>
+    <h1>Dropdown Menu</h1>
+    <article>
+        <div>
+            <select id="menu"></select>
+        </div>
+        <label for="newItemText">
+            Text:
+        </label>
+        <input type="text" id="newItemText" />
+        <label for="newItemValue">
+            Value:
+        </label>
+        <input type="text" id="newItemValue" />
+        <input type="button" value="Add" onclick="addItem()">
+    </article>
+</body>
+
+</html>
+
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
+body {
+    width: 40%;
+    margin: 0 auto;
+    padding-top: 20px;
+    font-family: 'Raleway', sans-serif;
+}
+
+h1 {
+    background-color: cadetblue;
+    margin: 0;
+    padding: 10px 20px;
+}
+
+article {
+    background-color: #DDDDDD;
+    padding: 10px 20px;
+}
+
+#menu {
+    padding: 3px 7px;
+    border-radius: 15px;
+}
+
+input, select {
+    outline: none;
+    padding: 5px;
+}
+select {
+    margin-bottom: 12px;
+}
+
+input[type="text"] {
+    border: 1px solid darkgray;
+    border-radius: 15px;
+}
+
+input[type="button"] {
+    background: white;
+    margin-left: 20px;
+    padding: 5px 15px;
+    border: 1px solid darkgray;
+    border-radius: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #8198A2;
+    text-transform: uppercase;
+}
