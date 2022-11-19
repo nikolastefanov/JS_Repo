@@ -1,0 +1,238 @@
+function solve() {
+   document.querySelector('#btnSend').addEventListener('click', onClick);
+
+   let input=document.querySelector('#inputs>textarea');
+
+   const bestRestaurantP=document.querySelector('#bestRestaurant>p');
+
+   const workerP=document.querySelector('#workers>p');
+
+   function onClick () {
+      
+      let arr=JSON.parse(input.value);
+
+     // console.log(arr);
+
+     let restaurants={};
+
+     arr.forEach(line => {
+        const tokens=line.split(' - ');
+        const name=tokens[0];
+        const workersString=tokens[1];
+
+        //console.log(name,workersString);
+
+        const workersArr=tokens[1].split(', ');
+
+        //console.log(workersArr);
+
+        let workers=[];
+        let bestSalary=0;
+  
+        for(let worker of workersArr){
+           workerTokens=worker.split(' ');
+           const salary=Number(workerTokens[1]);
+           workers.push({
+              name:workerTokens[0],
+              salary
+           })
+        }
+
+        if(restaurants[name]){
+           workers=workers.concat(restaurants[name].workers)
+        }
+
+        workers.sort((worker1,worker2)=>
+         worker2.salary-worker1.salary);
+
+         bestSalary=workers[0].salary; 
+        
+         //console.log(bestSalary);
+
+         //acc->sumSalary,  curr->tekucht worker
+         averageSalary=workers.reduce((sum,worker)=>
+         sum+worker.salary,0)/workers.length;
+
+         //console.log(averageSalary);
+         
+          restaurants[name]={
+             workers,
+             averageSalary,
+             bestSalary
+          }
+
+          //console.log(restaurants[name]);
+
+          //console.log(restaurants);
+
+         let best=undefined;
+          let bestRestaurantSalary=0;
+
+          for(const name in restaurants){
+             if(restaurants[name].averageSalary>bestRestaurantSalary){
+                best={
+                   name,
+                   workers:restaurants[name].workers,
+                   bestSalary:restaurants[name].bestSalary,
+                   averageSalary:restaurants[name].averageSalary
+                }
+             }
+             //console.log(best);
+          }
+
+         bestRestaurantP.textContent=`Name: ${best.name} Average Salary: ${best.averageSalary.toFixed(2)} Best Salary: ${best.bestSalary}`;
+
+        let workersRestaurant=[];
+
+        //console.log(best.workers);
+
+        /*
+        best.workers.forEach(worker=>
+         workersRestaurant.push(
+            `Name: ${worker.name} With Salary: ${worker.salary} `
+           
+         ));
+        */
+
+        for(let worker of best.workers){
+           workersRestaurant.push( `Name: ${worker.name} With Salary: ${worker.salary} `);
+           
+        }
+
+        //console.log(workersRestaurant);
+
+         workerP.textContent=workersRestaurant.join(' ');
+     });
+   }
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body onload="solve()">
+    <section class="restaurant-race-class">
+        <div id="inputs">
+            <h2>Add workers</h2>
+            <textarea></textarea>
+            <br>
+            <button type="submit" id="btnSend">Send</button>
+        </div>
+        <div id="outputs">
+            <div id="bestRestaurant">
+                <h2>Best Restaurant</h2>
+                <span></span>
+                <p></p>
+            </div>
+            <div id="workers">
+                <h2>Best Restaurant's workers</h2>
+                <span></span>
+                <p></p>
+            </div>
+        </div>
+
+    </section>
+    <script src="./app.js"></script>
+</body>
+
+</html>
+
+
+@import url(https://fonts.googleapis.com/css?family=Lato:400,300,700|Montserrat:400,700);
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size:22px;
+}
+
+.restaurant-race-class {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 1.5rem;
+    color: #aaa;
+}
+body{
+    background-image: url(./softuni-wallpaper-1-1920x1080.jpg);
+    background-position: top;
+}
+
+h2 {
+    color: white;
+    padding: 0.3rem;
+}
+span {
+    width: 25%;
+    margin: 0 auto;
+    height: 1px;
+    display: block;
+    border-bottom: 1px solid white;
+    margin-bottom: 10px;
+}
+
+textarea {
+    background: #fff;
+    border-radius: 5px; 
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
+    border: 1px solid #00BFFF;
+    margin-right: 1.2rem;
+    outline: none;
+    color: black;
+    font-size: 21px;
+    width: 50%;
+    resize: none;
+    height: 20vh;
+    width: 80%;
+    text-align: center;
+}
+
+#inputs, #outputs div{
+    margin: 20px 0px 20px 20px;
+    width: 1135px;
+    text-align: center;
+    padding-bottom: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    padding-left: 35px;
+    box-shadow: rgba(0, 0, 0, .15) 0 1px 3px;
+    background: radial-gradient(black, transparent);
+    text-shadow: black;
+    color:white;
+    border-bottom: 1px solid white;
+    border-left: 1px solid white;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+}
+
+label{
+    font-size: 18px;
+}
+button{
+    margin-top: 10px;
+    font-size: 22px;
+    margin-left: 5px;
+    background-color: #03496B;
+    outline: none;
+    border-top-right-radius: 25%;
+    border-bottom-left-radius: 40%;
+    border-top-color: white;
+    padding: 0.5rem;
+    color: #fff;
+    cursor: pointer;
+}
+
+button:hover {
+    box-shadow: 0px 1px 7px 4px white;
+}
+
